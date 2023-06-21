@@ -1,4 +1,4 @@
-const { Schema, Types, model } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const reactionSchema = new Schema({
     reactionId: {
@@ -18,7 +18,7 @@ const reactionSchema = new Schema({
         type: Date,
         default: Date.now,
         get: (date) => {
-            if (date) return date.toISOString().splite("T") [0];
+            if (date) return date.toLocaleDateString();
         },
     },
 },
@@ -59,4 +59,4 @@ const thoughtSchema = new Schema({
 
 const Thought = model('thought', thoughtSchema);
 
-modules.exports = Thought;
+module.exports = Thought;
