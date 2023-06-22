@@ -11,13 +11,13 @@ connection.once('open', async () => {
         await connection.dropCollection('users');
     }
 
-    let thoughtCheck = await connection.db.listCollections({ name: 'thoughts '}).toArray();
+    let thoughtCheck = await connection.db.listCollections({ name: 'thoughts'}).toArray();
     if (thoughtCheck.length) {
         await connection.dropCollection('thoughts');
     }
 
     await User.collection.insertMany(users);
-    await Thought.collection.insertMany(thoughts);
+    // await Thought.collection.insertMany(thoughts);
 
     console.table(users);
     console.table(thoughts);
