@@ -19,9 +19,15 @@
 
   screenshots of the various routes:
 
+  Route to get all users
+
   ![get-route](./images/get-route.png)
+  
+  Route to create new user
 
   ![post-route](./images/post_route.png)
+
+  Route to edit thought
 
   ![put-route](./images/put-route.png)
 
