@@ -1,5 +1,5 @@
 const { Schema, Types, model } = require('mongoose');
-
+// reaction schema, called in thoughts schema
 const reactionSchema = new Schema({
     reactionId: {
         type: Schema.Types.ObjectId,
@@ -17,6 +17,7 @@ const reactionSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now,
+        // getter to format date
         get: (date) => {
             const options = { weekday: "long", year: "numeric", month: "long", day: "numeric", hour: "numeric", minute: "2-digit" };
             if (date) return date.toLocaleString("en-US", options);
@@ -29,7 +30,7 @@ const reactionSchema = new Schema({
     },
     id: false,
 });
-
+// thought schema
 const thoughtSchema = new Schema({
     thoughtText: {
         type: String,
@@ -47,7 +48,7 @@ const thoughtSchema = new Schema({
     },
     
     userName: {type: String, required: true},
-    
+    // reference to reaction schema - creates array of reactions
     reactions: [reactionSchema],
     
 },
@@ -60,7 +61,7 @@ const thoughtSchema = new Schema({
     id: false,
     
 });
-
+// virtual to create a reaction count in json response and display count 
 thoughtSchema.virtual('reactionCount')
 .get(function () {
     return this.reactions.length;

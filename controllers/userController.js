@@ -2,6 +2,7 @@ const User = require('../models/User');
 const Thought = require('../models/Thought')
 
 module.exports = {
+        // gets all users
     async getUsers(req, res) {
         try {
             const users = await User.find();
@@ -10,6 +11,7 @@ module.exports = {
             res.status(500).json(err)
         }
     },
+    // gets single user by ID
     async getOneUser(req, res) {
         try {
             const user = await User.findOne({  _id: req.params.id })
@@ -25,6 +27,7 @@ module.exports = {
             res.status(500).json(err);
         }
     },
+    // creates new user
     async createUser(req, res) {
         try {
             const userData = await User.create(req.body);
@@ -33,7 +36,7 @@ module.exports = {
             res.status(500).json(err);
         }
     },
-
+    // edits information on existing user
     async updateUser(req, res) {
         try {
             const userData = await User.findOneAndUpdate({ _id: req.params.id}, { $set: req.body }, { runValidators: true, new: true });
@@ -46,7 +49,7 @@ module.exports = {
             res.status(500).json(err);
         }
     },
-
+    // adds friend to the user model array
     async addFriend(req, res) {
         try {
             const userData = await User.findOneAndUpdate({ _id: req.params.userId }, { $push: {friends: [req.params.friendId]}});
@@ -58,7 +61,7 @@ module.exports = {
             res.status(500).json(err);
         }
     },
-
+    // deletes user and associated thoughts
     async deleteUser(req, res) {
         try {
             const user = await User.findOneAndDelete( { _id: req.params.id });
@@ -69,6 +72,7 @@ module.exports = {
             res.status(500).json(err);
         }
     },
+    // removes single friend from user friends array
     async removeFriend(req, res) {
         try {
             const userData = await User.findOneAndUpdate({ _id: req.params.userId }, { $pull: {friends: req.params.friendId}});

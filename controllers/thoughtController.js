@@ -1,6 +1,7 @@
 const Thought = require('../models/Thought');
 const User = require('../models/User');
 module.exports = {
+    // function to display all thoughts
     async getThoughts(req, res) {
         try {
             const thoughts = await Thought.find();
@@ -9,7 +10,7 @@ module.exports = {
             res.status(500).json(err)
         }
     },
-
+    // function to display one thought
     async getOneThought(req, res) {
         try {
             const thought = await Thought.findOne({ _id: req.params.thoughtId })
@@ -22,7 +23,7 @@ module.exports = {
             res.status(500).json(err);
         }
     },
-    
+    // creates new thought
     async createThought(req, res) {
         try {
             const thought = await Thought.create(req.body);
@@ -43,7 +44,7 @@ module.exports = {
 
        
     },
-
+    // edits existing thought
     async updateThought(req, res) {
         try {
             const updatedThought = await Thought.findOneAndUpdate(
@@ -60,7 +61,7 @@ module.exports = {
             res.status(500).json(err);
         }
     },
-
+    // deletes single thought by ID
     async deleteThought(req, res) {
         try {
             const thought = await Thought.findOneAndDelete({ _id: req.params.thoughtId })
@@ -73,7 +74,7 @@ module.exports = {
             res.status(500).json(err);
         }
     },
-
+    // creates a reaction to a thought and adds to the reaction array in the thought model
     async createReact(req, res) {
         try {
             const thought = await Thought.findOneAndUpdate(
@@ -90,7 +91,7 @@ module.exports = {
             res.status(500).json(err);
         }
     },
-
+    // deletes a reaction from thought model array
     async removeReaction(req, res) {
         try {
             const thought = await Thought.findOneAndUpdate(
